@@ -65,8 +65,14 @@ function return_exit_code()
     fi
 }
 
+
+git_branch() {
+    git branch --contains HEAD 2> /dev/null | sed -e 's/* \(.*\)/\1/'
+}
+
+
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u@\h\[\033[00m\]:\[\033[0;34m\]\w\[\033[00m\]$(return_exit_code)\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u\[\033[00m\]:{$(git_branch)}\[\033[0;34m\]\w\[\033[00m\]$(return_exit_code)\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(return_exit_code)\$ '
 fi
@@ -124,3 +130,5 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+PATH=$PATH:~/bin
