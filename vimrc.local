@@ -7,49 +7,10 @@
 set nocompatible
 
 
-" Vundle 
-" ViM package manager
-" ------
-filetype off
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
-"" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-"" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-"" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-"" The sparkup vim script is in a subdirectory of this repo called vim.
-"" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-"" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
-
-Plugin 'scrooloose/nerdtree'
-"Plugin 'Valloric/YouCompleteMe'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-
-
 " NERD Tree
 " -----
-
-map <F8> :NERDTreeToggle<CR>
+nmap <F8> :NERDTreeToggle<CR>
 map <S-F8> :NERDTreeFind<CR>
-
 
 " Linux 
 " ------
@@ -70,13 +31,13 @@ set background=dark
 :set smartcase 
 
 
-" Mijn spulle
-" ----------- 
+" Mijn spullen
+" ------------
 
-" Mooie indentatie van HTML
+" Mooie indentatie van HTML etc
 filetype indent on
 
-" Meerdere buffers tegelijk open hebben met unsaved changes:
+" Meerdere buffers tegelijk open hebben met unsaved changes
 set hidden
 
 " Show line numbers
@@ -84,10 +45,8 @@ set number
 
 set langmenu=nl,en
 
-" Wat lijnen rond de cursor houden voor context
+" Enkele lijnen rond de cursor houden voor meer context
 set scrolloff=3
-
-"set nobomb
 
 set wildmenu
 
@@ -114,14 +73,13 @@ set expandtab
 
 set showmatch
 
-" Dat mottig roze in vimdiff is onleesbaar met bepaalde 
+" Dat mottig roze in vimdiff is onleesbaar
 highlight DiffText guibg=Purple
 
 " Data invoeren
 abbreviate datum   <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 abbreviate inc #ifndef <c-r>=toupper(expand('%:t:r'))<cr><cr>#define <c-r>=toupper(expand('%:t:r'))<cr><cr><cr>#endif
 abbreviate #i #include 
-abbreviate TF TEST_FIXTURE(,)<cr>{<cr>}<cr> 
 
 
 " Mappings
@@ -138,46 +96,38 @@ abbreviate TF TEST_FIXTURE(,)<cr>{<cr>}<cr>
 " Y iets meer intuitief maken
 nmap Y y$
 
-" F2: emails volledig te indenteren met '> '
+" Emails volledig te indenteren met '> '
 nmap <F2> gg<C-V>GI> <ESC>
 
-" Shift-F3: laatste macro herhalen
+" Laatste macro herhalen
 nmap <S-F3> @@
 
-" F3: Jump naar definitie functie (requires ctags)
+" Jump naar definitie functie (requires ctags)
 nmap <F3> <C-]>
 
-" F4: aligneer alle = op de nste kolom
+" Aligneer alle = op de nste kolom
 " <Bar> staat voor |
 nmap <F4> 0f=70i <Esc>D70<Bar>p
 
-" set virtualedit=all vooraleer deze map te gebruiken
+" Set virtualedit=all vooraleer deze map te gebruiken
 vmap <F4> :normal 0f=D70<Bar>p<CR>
 
 " Formateer en indenteer een paragraaf
 nmap <F5> gqap={
 
-" XML-element uitcommentari?ren
+" XML-element uitcommentariëren
 nmap <F6>   F<w"tywi!--<Esc>/\/<C-R>t/e<CR>a--<Esc>
 nmap <S-F6> F!3x*el2x
 
-" bewaar en bouw (2x <CR> op het einde voor de 'Press enter to continue')
+" Save and build (2x <CR> op het einde voor de 'Press enter to continue')
 nmap <S-F7> :wall<CR>:make<CR><CR>
 
-" Als we een C++ of C# file openen, trigger dan mijn VisualStudio colorscheme
-"colorscheme WimVS
-"BETER: laten gebeuren in scriptje dat Visual Studio oproept
+" Nog mappings
+nmap <F7> <cr><8><S-F7>
+map <F12> g<C-]>
 
 " Intellisense
 let b:dochelpdelay=10
-
-
-" Extra scriptjes
-" ---------------
-
-"source $HOME/eRP.vim
-
-" UnitTest++
 
 " C++ Omnicompletion
 " ------------------
@@ -191,14 +141,3 @@ set tags+=~/.vim/stdtags
 set tags+=c:/_development/stdtags
 set tags+=c:/_development/qttags
 
-" specifiek: Pikant
-"set tags+=~/Pikant/Source/tags
-"nmap <F8> :!exuberant-ctags -f ~/Pikant/Source/tags --recurse --c++-kinds=+pl --fields=+iaS --extra=+q ~/Pikant/Source<CR>
- 
-" specifiek: PrsCongoMil
-set tags+=c:/_development/projects/prs/trunk/tags
-nmap <F8> :!ctags -f c:/_development/projects/prs/trunk/tags --recurse --c++-kinds=+pl --fields=+iaS --extra=+q c:/_development/projects/prs/trunk<CR><CR>
-
-" Nog mappings
-nmap <F7> <cr><8><S-F7>
-map <F12> g<C-]>

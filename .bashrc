@@ -67,12 +67,12 @@ function return_exit_code()
 
 
 git_branch() {
-    git branch --contains HEAD 2> /dev/null | sed -e 's/* \(.*\)/\1/'
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u\[\033[00m\]:{$(git_branch)}\[\033[0;34m\]\w\[\033[00m\]$(return_exit_code)\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u\[\033[00m\]:\[\033[1;31m\]$(return_exit_code)\[\033[00m\]{$(git_branch)}\[\033[0;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(return_exit_code)\$ '
 fi
@@ -106,6 +106,9 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
+alias doco='docker-compose'
+alias docoma='docker-compose run mvne make'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
