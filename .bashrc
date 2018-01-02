@@ -61,7 +61,7 @@ function return_exit_code()
 {
     exit_code=$?
     if [ $exit_code -ne 0 ]; then
-            echo " (exit: ${exit_code})"
+            echo "(exit:${exit_code})"
     fi
 }
 
@@ -107,8 +107,10 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias grr='grep -Iris'
+alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 alias doco='docker-compose'
-alias docoma='docker-compose run mvne make'
+alias docoma='docker-compose run --rm mvne make'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
