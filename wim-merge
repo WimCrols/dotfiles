@@ -1,0 +1,28 @@
+#!/bin/bash
+
+function diff {
+    meld ${1} ${2} ${3}&
+}
+
+function main {
+    if [[ ${#} -ne 4 ]]
+    then
+       echo "Usage: ${0} base local remote merged"
+       exit 1
+    fi 
+
+    BASE=${1}
+    shift
+    LOCAL=${1}
+    shift
+    REMOTE=${1}
+    shift
+    MERGED=${1}
+    shift
+
+    diff ${BASE} ${LOCAL}
+    diff ${BASE} ${REMOTE}
+    diff ${LOCAL} ${MERGED} ${REMOTE}
+}
+
+main ${*}
