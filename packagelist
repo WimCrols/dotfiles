@@ -3,6 +3,6 @@ vim-gnome
 terminator
 tree
 meld
-virtualenvwrapper
 gimp
-openjdk-7-jdk:amd64
+#virtualenvwrapper
+#openjdk-7-jdk:amd64
