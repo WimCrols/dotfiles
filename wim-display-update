@@ -1,0 +1,24 @@
+#!/bin/bash
+## Toggle between monitor modes
+
+currentmonitor=$(xrandr --query | awk '/\ connected/{print $1}')
+echo "Current monitor = '$currentmonitor'"
+
+right=$'HDMI-1'
+left=$'eDP-1'
+double=$'eDP-1\nHDMI-1'
+
+if [ "$currentmonitor" = "$double" ] 
+then 
+    echo "Detected double monitors"
+    xrandr --output $left --auto --output $right --primary --auto --right-of $left
+elif [ "$currentmonitor" = "$left" ] 
+then
+    echo "Detected only left monitor"
+    xrandr --output $left --auto --primary --output $right --off
+else 
+    echo "Detection error: $currentmonitor"
+    xrandr --output $left --auto --primary --output $right --off
+fi
+
+exit 0
