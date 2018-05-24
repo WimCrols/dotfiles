@@ -1,0 +1,17 @@
+#!/bin/bash -e
+
+THIS_DIR=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
+
+echo "Installing config..."
+sudo cp vimrc.local /etc/vim/
+cp .gitconfig ~
+
+ln -s ${THIS_DIR}/.bash_aliases ~/.bash_aliases
+
+mv ~/.bashrc ~/.bashrc.orig
+ln -s ${THIS_DIR}/.bashrc ~/.bashrc
+
+echo "Installing scripts..."
+mkdir ~/bin
+cp ./wim-* ~/bin
+
