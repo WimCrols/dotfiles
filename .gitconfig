@@ -7,6 +7,7 @@
 	s = status
 	low = log --color --graph --pretty=format:'%C(bold red)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     l = log --color --graph --pretty=format:'%C(bold red)%h%Creset -%C(bold yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    ll = log -10 --color --graph --pretty=format:'%C(bold red)%h%Creset -%C(bold yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     unstage = reset HEAD --
 [rebase]
 	autosquash = true
@@ -17,3 +18,7 @@
 	untracked = bold red
 [push]
 	default = current
+[merge]
+	tool = wimmerge
+[mergetool "wimmerge"]
+	cmd = ~/bin/wim-merge $BASE $LOCAL $REMOTE $MERGED

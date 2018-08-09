@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function diff {
-    meld ${1} ${2} ${3}&
+    meld ${1} ${2} ${3}
 }
 
 function main {
@@ -20,8 +20,8 @@ function main {
     MERGED=${1}
     shift
 
-    diff ${BASE} ${LOCAL}
-    diff ${BASE} ${REMOTE}
+    diff ${BASE} ${LOCAL}&
+    diff ${BASE} ${REMOTE}&
     diff ${LOCAL} ${MERGED} ${REMOTE}
 }
 
